@@ -19,3 +19,8 @@ Route::get('/', function () {
 });
 
 Route::get('/', [Main::class, 'index']);
+Route::get('/album', [Main::class, 'album']);
+Route::get('/detailAlbum/{id}', [Main::class, 'detailAlbum'])->where("id", "[0-999]+");
+Route::get('/signin', [Main::class, 'signin']);
+Route::get('/login', [Main::class, 'login']);
+// Route::get('/logout', [Main::class, 'logout']);
