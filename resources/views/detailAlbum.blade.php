@@ -15,37 +15,46 @@
 
     <input name="button" type="submit" placeholder="Rechercher"></input>
 
+    <select name="tags[]" multiple>
+        @foreach($liste_tags as $tag)
+            <option value="{{ $tag->nom }}"
+                @if(is_array(request('tags')) && in_array($tag->nom, request('tags'))) selected @endif
+            >
+                {{ $tag->nom }}
+            </option>
+        @endforeach
+    </select>
+
 </form>
 
 @if($liste_tags)
 
     @foreach($liste_tags as $l)
-
-        <a href="/detailAlbum/{{$id}}?tag={{$l->nom}}">{{$l->nom}}</a>
-    @endforeach
+    <a href="?tag={{ $l->nom }}"
+       class="{{ request('tag') == $l->nom ? 'active-tag' : '' }}">
+        {{ $l->nom }}
+    </a>
+@endforeach
 
 @endif
 
-@if($album == [])
+    <h1>{{$album->titre}}</h1>
+
+@if($photos->isEmpty())
 
     <h1>Pas de photos !</h1>
 
 @else
-    <h1>{{$album[0]->titre_album}}</h1>
 
-    @foreach($album as $a)
+    @foreach ($photos as $photo)
+    <span>{{$photo->titre}}</span>
+    <img src="{{ $photo->url }}">
 
-        <img src="{{$a->url}}" alt="{{$a->titre}}">
-        <h2>{{$a->titre}}</h2>
-        
-        @foreach($tags as $t)
-            @if($t->photo_id == $a->id)
-                <span>{{$t->nom}}</span>
-            @endif
+        @foreach ($photo->tags as $tag)
+            <span class="badge">{{ $tag->nom }}</span>
         @endforeach
-        
-
     @endforeach
+
 @endif
 
 

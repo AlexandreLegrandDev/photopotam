@@ -21,7 +21,10 @@ Route::get('/', function () {
 Route::get('/', [Main::class, 'index']);
 Route::get('/album', [Main::class, 'album']);
 Route::get('/detailAlbum/{id}', [Main::class, 'detailAlbum'])->where("id", "[0-999]+");
-Route::get('/signin', [Main::class, 'signin']);
-Route::get('/login', [Main::class, 'login']);
+// Route::get('/login', [Main::class, 'login']);
+// Route::get('/register', [Main::class, 'register']);
+Route::get('/create_album', [Main::class, 'create_album'])->middleware('auth');
+Route::post('/store_album', [Main::class, 'store_album'])->middleware('auth');
+
 
 // Route::get('/logout', [Main::class, 'logout']);

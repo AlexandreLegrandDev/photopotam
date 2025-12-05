@@ -26,7 +26,9 @@
             <span>{{$a->titre}}</span>
             <span>{{$a->creation}}</span>
             <span>{{$a->user_id}}</span>
-            <img src="{{$a->photo_url}}">
+            @if($a->photos->isNotEmpty())
+                <img src="{{ $a->photos->first()->url }}" alt="">
+            @endif
 
         </div>
     </a>

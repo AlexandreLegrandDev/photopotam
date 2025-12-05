@@ -13,10 +13,22 @@
         <nav>
         <a href="/">index</a>
         <a href="/album">album</a>
-        <a href="/signin">signin</a>
+        <a href="/register">signin</a>
         <a href="/login">login</a>
         </nav>
     </header>
+
+    @auth
+        <h1>Bonjour {{Auth::user()->name}}</h1>
+        
+        <a href="/create_album">Créer un album</a>
+
+        <a href="{{route("logout")}}"
+           onclick="document.getElementById('logout').submit(); return false;">Logout</a>
+        <form id="logout" action="{{route("logout")}}" method="post">
+            @csrf
+        </form>
+    @endauth
 
     <main class="content">
         @yield('content')

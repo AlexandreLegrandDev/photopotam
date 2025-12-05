@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
+    
     use HasFactory;
     public $timestamps = false;
+    protected $guarded = [];
+    
+    protected $fillable = ['id', 'titre', 'creation', 'user_id'];
+
+
     public function photos() {
         return $this->hasMany(Photo::class, "album_id");
     }
@@ -16,4 +22,9 @@ class Album extends Model
     public function user() {
         return $this->belongsTo(User::class,"user_id");
     }
+
+    public function tags()
+{
+    return $this->hasManyThrough(Tag::class, Photo::class, 'album_id', 'id', 'id', 'id')->distinct();
+}
 }

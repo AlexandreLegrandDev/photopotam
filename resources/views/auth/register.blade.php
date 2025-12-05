@@ -14,15 +14,21 @@
     </div>
 
     <div id="signin_div">
-        <form method="post">
+        <form action="{{route("register")}}" method="post">
             @csrf
         <h1>S'inscrire</h1>
 
-            <input name="username" type="text" placeholder="Nom d'utilisateur" required>
+            <!-- <input name="username" type="text" placeholder="Nom d'utilisateur" required>
             <input name="email" type="email" placeholder="Adresse e-mail" required>
             <input name="password" type="password" placeholder="Mot de passe" required>
             <input name="password_confirmation" type="password" placeholder="Confirmer le mot de passe" required>
-            <button type="submit">S'inscrire</button>
+            <button type="submit">S'inscrire</button> -->
+
+            <input type="text" name="name" required placeholder="Nom d'utilisateur" />
+            <input type="email" name="email" required placeholder="Adresse e-mail" />
+            <input type="password" name="password" required placeholder="Mot de passe" />
+            <input type="password" name="password_confirmation" required placeholder="Confirmer le mot de passe" />
+            <button type='submit'>S'inscrire</button>
 
             <span>Déjà un compte ? <a href="/login">Se connecter</a></span>
 

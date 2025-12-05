@@ -9,6 +9,7 @@ class Photo extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = ['id', 'titre', 'url', 'note', 'album_id', 'user_id'];
 
     public function album() {
         return $this->belongsTo(Album::class, "album_id");
