@@ -49,7 +49,7 @@
     @foreach ($photos as $photo)
     <div class="photo-item">
     <span id="look">{{$photo->titre}}</span></br>
-    <img src="{{ $photo->url }}"></br>
+    <img src="{{ $photo->url }}" class="grand"></br>
 
         @foreach ($photo->tags as $tag)
             <span class="badge"> #{{ $tag->nom }}</span>
@@ -59,5 +59,5 @@
 </div>
 @endif
 
-
+<script src="{{asset('js/script.js')}}"></script>
 @endsection

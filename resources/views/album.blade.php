@@ -26,8 +26,8 @@
             <span>{{$a->titre}}</span>
             <span>{{$a->creation}}</span>
             <span>{{$a->user_id}}</span>
-            @if($a->photos->isNotEmpty())
-                <img src="{{ $a->photos->first()->url }}" alt="">
+            @if(isset($a->preview) && $a->preview)
+                <img src="{{ $a->preview->url }}" alt="">
             @endif
 
         </div>
