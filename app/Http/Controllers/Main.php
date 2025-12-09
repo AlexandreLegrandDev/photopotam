@@ -22,9 +22,8 @@ class Main extends Controller
 
     $search = $request->input('search');
 
-    $albumWithPreview = Album::query()->with(['photos' => function ($query) {
-            $query->orderBy('url')->limit(1);
-        }]); 
+    // Eager-load a single preview photo per album using the hasOne 'preview' relation
+    $albumWithPreview = Album::with('preview');
 
     if ($search) {
         $albumWithPreview->where(function ($q) use ($search) {

@@ -19,6 +19,11 @@ class Album extends Model
         return $this->hasMany(Photo::class, "album_id");
     }
 
+    public function preview()
+    {
+        return $this->hasOne(Photo::class, 'album_id')->orderBy('url');
+    }
+
     public function user() {
         return $this->belongsTo(User::class,"user_id");
     }
