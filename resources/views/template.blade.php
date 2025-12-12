@@ -20,7 +20,7 @@
 
         @auth
             <a href="/create_album">Créer un album</a>
-
+            <a href="/perso">Mes albums</a>
             <a href="{{route("logout")}}"
             onclick="document.getElementById('logout').submit(); return false;">Se déconnecter</a>
             <form id="logout" action="{{route("logout")}}" method="post">

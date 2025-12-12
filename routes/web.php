@@ -28,4 +28,6 @@ Route::post('/store_album', [Main::class, 'store_album'])->middleware('auth');
 
 Route::get('/perso', [Main::class, 'perso'])->middleware('auth');
 
+Route::post('/store_photo,', [Main::class, 'store_photo'])->middleware('auth');
+
 // Route::get('/logout', [Main::class, 'logout']);

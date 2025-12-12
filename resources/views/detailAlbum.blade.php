@@ -27,7 +27,7 @@
 
 </form>
 
-@if($liste_tags)
+<!-- @if($liste_tags)
 
     @foreach($liste_tags as $l)
     <a href="?tag={{ $l->nom }}"
@@ -36,7 +36,19 @@
     </a>
 @endforeach
 
-@endif
+@endif -->
+
+@auth 
+
+    <form method="post" action="/store_photo" enctype="multipart/form-data">
+        @csrf    
+        <input type="hidden" name="album_id" value="{{$id}}"></input>
+        <input type="text" name="titre" value="{{ old('titre') }}" placeholder="Nom de la photo" required></input>
+        <input type="file" name="image" value="{{ old('image') }}" required></input>
+        <input type="submit" value="Ajouter une photo"></input>
+    </form>
+
+@endauth
 
     <h1>{{$album->titre}}</h1>
 

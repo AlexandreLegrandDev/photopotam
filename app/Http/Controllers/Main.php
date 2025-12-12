@@ -22,7 +22,6 @@ class Main extends Controller
 
     $search = $request->input('search');
 
-    // Eager-load a single preview photo per album using the hasOne 'preview' relation
     $albumWithPreview = Album::with('preview');
 
     if ($search) {
@@ -116,13 +115,30 @@ class Main extends Controller
     }
 
     public function perso(){
-        $albums = Album::query()->with(['photos' => function ($query) {
-            $query->orderBy('url')->limit(1);
-        }])->where('id', 'LIKE', Auth::id())->get(); 
-
-        dd($albums);
+        $albums = Album::with('preview')->where('user_id', 'LIKE', Auth::id())->get(); 
 
         return view('perso', ['albums' => $albums]);
+    }
+
+    public function store_photo(Request $request) {
+        $data = $request->validate([
+            'id' => 'required',
+            'titre' => 'required|min:2',
+            'image' => 'required'
+        ]);
+
+        $name = $request->file('image')->hashName();
+        $request->file('image')->move("photos/", $name);
+        $data['image'] = "/photos/" . $name;
+
+        Photo::create([
+            "titre" => $data['titre'],
+            "url" => $data['image'],
+            "album_id" => $data['id'],
+            "user_id" => Auth::id()
+        ]);
+        
+        return redirect ("/detailAlbum/". $data['id']);
     }
 
 }
