@@ -24,6 +24,7 @@
                 @endguest
                 @auth
                 <a href="/create_album" class="btn ghost">Nouveau</a>
+                <a href="/perso" class="btn ghost">Mon espace</a>
                 <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit();" class="btn ghost">Logout</a>
                 <form id="logout" action="{{route('logout')}}" method="post" style="display:none">@csrf</form>
                 @endauth
@@ -34,6 +35,7 @@
     @auth
         <h1>Bonjour {{Auth::user()->name}}</h1>
     @endauth
+
 
     <main class="content">
         @yield('content')

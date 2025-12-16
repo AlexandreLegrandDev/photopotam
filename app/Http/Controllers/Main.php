@@ -83,7 +83,7 @@ class Main extends Controller
         if($search) {
             $photos = Photo::where('album_id', $id)->where('titre', 'LIKE', "%{$search}%")->get();
         }
-
+        
         return view('detailAlbum', ['id' => $id, 'album' => $album, 'liste_tags' => $liste_tags, 'photos' => $photos]);
     }
 

@@ -16,7 +16,7 @@
         </form>
     </div>
     <div>
-        <a href="/create_album" class="btn">Nouveau album</a>
+        <a href="/create_album" class="btn">Nouvel album</a>
     </div>
 </div>
 

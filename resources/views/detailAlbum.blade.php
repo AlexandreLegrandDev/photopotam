@@ -39,7 +39,7 @@
 @endif -->
 
 @auth 
-
+    @if(Auth::id() == $album->user_id)
     <form method="post" action="/store_photo" enctype="multipart/form-data">
         @csrf    
         <input type="hidden" name="album_id" value="{{$id}}"></input>
@@ -47,6 +47,7 @@
         <input type="file" name="image" value="{{ old('image') }}" required></input>
         <input type="submit" value="Ajouter une photo"></input>
     </form>
+    @endif
 
 @endauth
 
