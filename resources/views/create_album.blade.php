@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form method='post' action='/store_album'>
+    <form method='post' action='{{ route("album.store") }}'>
         @csrf
 
         <input name="titre" required>nom de l'album</input>

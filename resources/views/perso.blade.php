@@ -8,7 +8,7 @@
 
 @foreach($albums as $a)
 
-    <a href="/detailAlbum/{{$a->id}}">
+    <a href="{{ route('album.show', $a->id)}}">
         <div>
 
             <span>{{$a->titre}}</span>
@@ -18,6 +18,13 @@
                 <img src="{{ $a->photos->first()->url }}" alt="">
             @endif
 
+            <a href="#"
+            onclick="document.getElementById('form.{{$a->id}}').submit();">Delete</a>
+            <form action="{{ route('album.destroy', $a->id) }}" method="POST" id="form.{{$a->id}}" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+            
         </div>
     </a>
 @endforeach

@@ -23,7 +23,7 @@
 <div class="container">
     <div id="albums_container">
         @foreach($albums as $a)
-            <a href="/detailAlbum/{{$a->id}}" style="text-decoration:none;">
+            <a href="{{ route('album.show', $a->id) }}" style="text-decoration:none;">
                 <div class="album-card card">
                     @if(isset($a->preview) && $a->preview)
                         <img class="thumb" src="{{ $a->preview->url }}" alt="{{ $a->titre }}">

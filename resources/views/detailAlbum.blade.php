@@ -40,7 +40,7 @@
 
 @auth 
     @if(Auth::id() == $album->user_id)
-    <form method="post" action="/store_photo" enctype="multipart/form-data">
+    <form method="post" action="{{ route('photo.store') }}" enctype="multipart/form-data">
         @csrf    
         <input type="hidden" name="album_id" value="{{$id}}"></input>
         <input type="text" name="titre" value="{{ old('titre') }}" placeholder="Nom de la photo" required></input>
