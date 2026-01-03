@@ -6,6 +6,7 @@
 
 @section('content')
 
+<div class="container">
 
 <form method="GET" action="/detailAlbum/{{$id}}">
 
@@ -13,7 +14,7 @@
 
     <input name="search" type="text" placeholder="Rechercher une photo" required></input>
 
-    <input name="button" type="submit" placeholder="Rechercher"></input>
+    <input name="button" type="submit" value="Rechercher"></input>
 
     <select name="tags[]" multiple>
         @foreach($liste_tags as $tag)
@@ -58,6 +59,8 @@
     @endforeach
 </div>
 @endif
+
+</div>
 
 <script src="{{asset('js/script.js')}}"></script>
 @endsection

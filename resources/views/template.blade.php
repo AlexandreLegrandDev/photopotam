@@ -23,25 +23,13 @@
                 <a href="/login">Se connecter</a>
                 @endguest
                 @auth
-                <a href="/create_album" class="btn ghost">Nouveau</a>
-                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit();" class="btn ghost">Logout</a>
+                <a href="/create_album" class="btn">Nouveau</a>
+                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit();" class="btn">Logout</a>
                 <form id="logout" action="{{route('logout')}}" method="post" style="display:none">@csrf</form>
                 @endauth
             </nav>
         </div>
     </header>
-
-    @auth
-        <h1>Bonjour {{Auth::user()->name}}</h1>
-        
-        <a href="/create_album">Créer un album</a>
-
-        <a href="{{route("logout")}}"
-           onclick="document.getElementById('logout').submit(); return false;">Logout</a>
-        <form id="logout" action="{{route("logout")}}" method="post">
-            @csrf
-        </form>
-    @endauth
 
     <main class="content">
         @yield('content')
