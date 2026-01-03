@@ -49,7 +49,7 @@
 @endauth
 
     <h1>{{$album->titre}}</h1>
-    <h2>{{$album->user->name}}</h2>
+    <h2>{{optional($album->user)->name}}</h2>
 
 @if($photos->isEmpty())
 
