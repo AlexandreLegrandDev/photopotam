@@ -23,7 +23,7 @@
             <input name="password" type="password" placeholder="Mot de passe" required>
             <button type="submit">Se Connecter</button>
 
-            <span>Pas encore de compte ? <a href="/signin"> S'inscrire</a></span>
+            <span>Pas encore de compte ? <a href="/register"> S'inscrire</a></span>
 
         </form>
     </div>

@@ -32,11 +32,6 @@
         </div>
     </header>
 
-    @auth
-        <h1>Bonjour {{Auth::user()->name}}</h1>
-    @endauth
-
-
     <main class="content">
         @yield('content')
     </main>

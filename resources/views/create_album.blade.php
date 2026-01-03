@@ -1,14 +1,23 @@
 @extends('template')
 
+@push('css')
+    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
+@endpush
+
 @section('content')
 
-    <form method='post' action='{{ route("album.store") }}'>
+<div class="container">
+
+    <h1>Créer un nouvel album</h1>
+
+    <form method='post' action='/store_album' class="create-form">
         @csrf
 
-        <input name="titre" required>nom de l'album</input>
-        <button type='submit'></button>
+        <input name="titre" placeholder="Nom de l'album" required>
+        <button type='submit'>Créer</button>
 
     </form>
 
+</div>
 
 @endsection
