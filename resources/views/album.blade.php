@@ -32,7 +32,11 @@
                     @endif
                     <div class="album-meta">
                         <div class="title">{{ $a->titre }}</div>
-                        <div class="info">Créé le {{ $a->creation }} · Propriété: {{ $a->user_id }}</div>
+                        @foreach($user as $u)
+                            @if($a->user_id == $u->id)
+                            <div class="info">Créé le {{ $a->creation }} · Propriété: {{ $u->name }}</div>
+                            @endif    
+                        @endforeach    
                     </div>
                 </div>
             </a>

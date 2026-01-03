@@ -32,4 +32,5 @@ class Album extends Model
 {
     return $this->hasManyThrough(Tag::class, Photo::class, 'album_id', 'id', 'id', 'id')->distinct();
 }
+
 }

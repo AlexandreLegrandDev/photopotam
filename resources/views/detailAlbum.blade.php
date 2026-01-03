@@ -18,8 +18,7 @@
     <select name="tags[]" multiple>
         @foreach($liste_tags as $tag)
             <option value="{{ $tag->nom }}"
-                @if(is_array(request('tags')) && in_array($tag->nom, request('tags'))) selected @endif
-            >   
+                @if(is_array(request('tags')) && in_array($tag->nom, request('tags'))) selected @endif>   
                 {{ $tag->nom }}
             </option>
         @endforeach
@@ -27,16 +26,7 @@
 
 </form>
 
-<!-- @if($liste_tags)
 
-    @foreach($liste_tags as $l)
-    <a href="?tag={{ $l->nom }}"
-       class="{{ request('tag') == $l->nom ? 'active-tag' : '' }}">
-        {{ $l->nom }}
-    </a>
-@endforeach
-
-@endif -->
 
 @auth 
     @if(Auth::id() == $album->user_id)
@@ -45,6 +35,13 @@
         <input type="hidden" name="album_id" value="{{$id}}"></input>
         <input type="text" name="titre" value="{{ old('titre') }}" placeholder="Nom de la photo" required></input>
         <input type="file" name="image" value="{{ old('image') }}" required></input>
+            @foreach($liste_tags as $l)
+                <label>
+                    <input type="checkbox" name="tags[]" value="{{ $l->id }}">
+                    {{ $l->nom }}
+                </label>
+            @endforeach
+
         <input type="submit" value="Ajouter une photo"></input>
     </form>
     @endif
@@ -52,6 +49,7 @@
 @endauth
 
     <h1>{{$album->titre}}</h1>
+    <h2>{{$album->user->name}}</h2>
 
 @if($photos->isEmpty())
 
@@ -67,6 +65,15 @@
         @foreach ($photo->tags as $tag)
             <span class="badge"> #{{ $tag->nom }}</span>
         @endforeach
+        
+        <form action="{{ route('photo.destroy', $photo->id) }}" method="POST" style="display:inline">
+            @csrf
+            @method('DELETE')
+
+            <input type="submit" class="btn ghost"
+                onclick="return confirm('Supprimer cette photo ?')" value="Supprimer">
+            </input>
+        </form>
     </div>
     @endforeach
 </div>

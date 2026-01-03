@@ -10,7 +10,7 @@
 
     <h1>Créer un nouvel album</h1>
 
-    <form method='post' action='/store_album' class="create-form">
+    <form method='post' action="{{ route('album.store') }}" class="create-form">
         @csrf
 
         <input name="titre" placeholder="Nom de l'album" required>

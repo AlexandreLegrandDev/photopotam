@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends Controller
 {
@@ -29,40 +30,30 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id' => 'required',
-            'titre' => 'required|min:2',
-            'url' => 'required'
+        'album_id' => 'required|exists:albums,id',
+        'titre' => 'required|min:2',
+        'image' => 'required|image|max:5120',
+        'tags' => 'nullable|array',
+        'tags.*' => 'exists:tags,id',
         ]);
 
-        $name = $request->file('url')->hashName();
-        $request->file('url')->move("photos/", $name);
-        $data['url'] = "/photos/" . $name;
+        $name = $request->file('image')->hashName();
+        $request->file('image')->move("photos/", $name);
+        $data['image'] = "/photos/" . $name;
 
-        $photo = Photo::create($data);
-        $photo->save();
+        $photo = Photo::create([
+            'titre' => $data['titre'],
+            'url' => $data['image'],
+            'album_id' => $data['album_id'],
+            'user_id' => Auth::id()
+            ]);
+
+        if (!empty($data['tags'])) {
+        $photo->tags()->attach($data['tags']);
+        }
 
         return back();
 
-        // $data = $request->validate([
-
-        //     "titre"=> "required|min:2",
-        //     "image"=> "required|image",
-        //     "annee"=> "required",
-        //     "nbSpectateurs"=> "required",
-        //     "idRealisateur"=> "",
-        //     "idGenre"=> ""
-
-  
-        // ]);
-
-        // $name = $request->file('image')->hashName();
-        // $request->file('image')->move("photos/", $name);
-        // $data['image'] = "/photos/" . $name;
-
-        // $photo = Photo::create($data);
-        // $photo->save();
-
-        // return back();
     }
 
     /**

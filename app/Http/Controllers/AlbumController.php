@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
+use App\Models\User;
 use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -27,8 +29,10 @@ class AlbumController extends Controller
     }
 
     $albums = $albumWithPreview->get();
+
+    $user = User::get();
     
-    return view('album', ['albums' => $albums]);
+    return view('album', ['albums' => $albums, 'user' => $user]);
     }
 
     /**
@@ -63,14 +67,18 @@ class AlbumController extends Controller
     public function show(Request $request, $id)
     {
         $search = $request->input('search');
-        $album = Album::find($id); 
+        $album = Album::with('user')->findOrFail($id);
         $photos = Photo::where('album_id', $id)->get();
 
-        $liste_tags = [];
+        $liste_tags = Tag::whereHas('photos', function ($q) use ($id) {
+            $q->where('album_id', $id);
+        })->distinct()->get();
+
 
         if($search) {
             $photos = Photo::where('album_id', $id)->where('titre', 'LIKE', "%{$search}%")->get();
         }
+        
         
         return view('detailAlbum', ['id' => $id, 'album' => $album, 'liste_tags' => $liste_tags, 'photos' => $photos]);
     }
