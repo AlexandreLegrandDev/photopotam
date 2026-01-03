@@ -23,8 +23,8 @@
                 <a href="/login">Se connecter</a>
                 @endguest
                 @auth
-                <a href="/create_album" class="btn">Nouveau</a>
-                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit();" class="btn">Logout</a>
+                <a href="/create_album" class="btn ghost">Nouveau</a>
+                <a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout').submit();" class="btn ghost">Logout</a>
                 <form id="logout" action="{{route('logout')}}" method="post" style="display:none">@csrf</form>
                 @endauth
             </nav>
